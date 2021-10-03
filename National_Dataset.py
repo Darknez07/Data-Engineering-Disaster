@@ -9,8 +9,8 @@ import sys
 
 app = dash.Dash()
 
-df = pd.read_csv("us_disaster_declarations.csv")
-df2 = pd.read_csv('Final_dataset.csv')
+df = pd.read_csv("Datasets/us_disaster_declarations.csv")
+df2 = pd.read_csv('Datasets/Final_dataset.csv')
 
 
 ans = df[['fy_declared','incident_type']].value_counts().sort_index(level=0)
