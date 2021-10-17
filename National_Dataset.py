@@ -9,8 +9,8 @@ import sys
 
 app = dash.Dash()
 
-df = pd.read_csv("Datasets/us_disaster_declarations.csv")
-df2 = pd.read_csv('Datasets/Final_dataset.csv')
+df = pd.read_csv("us_disaster_declarations.csv")
+df2 = pd.read_csv('Final_dataset.csv')
 
 
 ans = df[['fy_declared','incident_type']].value_counts().sort_index(level=0)
@@ -91,10 +91,12 @@ fed = df['Rating'].value_counts()
 dfed = df.groupby(['incident_type','Hazard_ranking']).size().reset_index(name="Counts").sort_values(by=['Counts','Hazard_ranking'],ascending=False)
 print(df['Hazard_ranking'].mean())
 
+freq = df.groupby(['incident_type','Rating']).size().reset_index(name="Counts").sort_values(by=["Counts"],ascending=False)
 
-fig = px.scatter( y = df['Hazard_ranking'].values, x = df['incident_type'].values)
+fig = px.scatter( y = df['Impact_factor'].values, x = df['incident_type'].values)
 fig2 = px.bar(dfed, x = 'incident_type', y = 'Counts',color = 'Hazard_ranking', title='Stacked')
 fig3 = px.bar(finals, x = 'fy_declared', y = 'Counts', color ='incident_type')
+fig4 = px.bar(freq, x ='incident_type', y='Counts', color ='Rating', title="Some good one")
 
 app.layout = html.Div(
     [
@@ -113,6 +115,14 @@ app.layout = html.Div(
             ),
         ]),
         html.Div([
+            dcc.Graph(
+                id = "Scatter",
+                figure= fig
+            ),
+            dcc.Graph(
+                id='baring',
+                figure=fig4
+            ),
             dcc.Graph(
                 id='plot-bar',
                 figure=go.Figure(data=[go.Bar(y = fed.values, x = ["Frequent",'Occasional','Rare'],name='Rating')])
