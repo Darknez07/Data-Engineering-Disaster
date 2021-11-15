@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>
+            Welcome to Title face
+        </title>
+    </head>
+    <body>
+        {% if answer == False or num == 0 %}
+        {% if num == 0 %}
+            <h2 style="color:red; margin: 1em;"> Re Enter </h2>
+        {% endif %}
+        <form action = "/" method="post">
+            <input type = "text" size="40" placeholder="Enter number of Disasters" name="dis">
+            <input type="submit" />
+        </form>
+        {% endif %}
+        {% if answer == True %}
+            <form action = "/submit">
+                {% for i in range(num) %}
+                    <form>
+                        <input type="checkbox" name="lol" />
+                    </form>
+                {% endfor %}
+            </form>
+        {% endif %}
+    </body>
+</html>
