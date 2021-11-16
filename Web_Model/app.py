@@ -17,6 +17,8 @@ def router():
 
 @app.route('/submit',methods=['POST','GET'])
 def subs():
+    if request.method == 'POST':
+        print(request.json)
     return "<h1> Hey </h1>"
 
 if __name__ == '__main__':
