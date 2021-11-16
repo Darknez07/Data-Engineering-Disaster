@@ -4,6 +4,7 @@
             Welcome to Title face
         </title>
     </head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <body>
         {% if answer == False or num == 0 %}
         {% if num == 0 %}
@@ -15,13 +16,62 @@
         </form>
         {% endif %}
         {% if answer == True %}
-            <form action = "/submit">
-                {% for i in range(num) %}
-                    <form>
-                        <input type="checkbox" name="lol" />
-                    </form>
-                {% endfor %}
-            </form>
+        <form action = "/submit" method="post">
+            {% for i in range(num) %}
+                <form id="{{ i }}" style="display: inline; margin-top: 10%; margin-left: 10%;">
+                    <div style="display: inline;">
+                        How Often Disasters Occur:
+                        <select id="{{ i }}x" style="display: inline; vertical-align: auto; margin: 0.6%;">
+                            <option value="3">Frequent</option>
+                            <option value="2">Occasional</option>
+                            <option value="1">Rare</option>
+                        </select>
+                        What is the damage to Property:
+                        <select id="{{ i }}y" style="display: inline; vertical-align: auto; margin: 0.6%;">
+                            <option value="3">High</option>
+                            <option value="2">Mediocre</option>
+                            <option value="1">Less</option>
+                        </select>
+                        Expenditure/Damage which costs money:
+                        <select id="{{ i }}z" style="display: inline; vertical-align: auto; margin: 0.6%;">
+                            <option value="3">High</option>
+                            <option value="2">Mediocre</option>
+                            <option value="1">Less</option>
+                        </select>
+                        Population Loss/Death:
+                        <select id="{{ i }}1" style="display: inline; vertical-align: auto; margin: 0.6%;">
+                            <option value="3">High</option>
+                            <option value="2">Mediocre</option>
+                            <option value="1">Less</option>
+                        </select>
+                    </div>
+                </form>
+            {% endfor %}
+        <input type="button" value="Submit" onclick="Submit_multi()" style="margin-left: 45%; margin-top: 2%;" />
+        </form>
         {% endif %}
     </body>
+    <script>
+        Submit_multi = function() {
+            all_of_them = [];
+            for(let i=0;i<document.forms.length;i++){
+                fucked = document.getElementById(i.toString());
+                forms = {};
+                forms[i+"x"] = document.getElementById(i+"x").value;
+                forms[i +"y"] = document.getElementById(i+"y").value;
+                forms[i+"z"] = document.getElementById(i+"z").value;
+                forms[i+"1"] = document.getElementById(i+"1").value;
+                all_of_them[i] = forms;
+            }
+            var data = JSON.stringify(all_of_them);
+            $.ajax({
+                type: "POST",
+                url: window.location.href+"submit",
+                data: data,
+                success: function(){},
+                contentType: "application/json"
+            });
+            // JSON.stringify(document.getElementById)
+        }
+    </script>
 </html>
