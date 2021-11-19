@@ -1,0 +1,1 @@
+When population loss is expected to be medium, we need to priortize the population by migrating or alerting the zones of a state and yellow alert statewide.
