@@ -34,10 +34,12 @@ def subs():
         pdf.set_title('Lol')
         pdf.set_author('Rishi Kakkar, Akshat Singh, Rahul Pandey, Subham Shah, Nitesh Jha')
         for ans in request.json:
+            print(ans)
             filler = []
             filler.append("Disaster_"+str(number))
 
             l = list(map(int, list(ans.values())))
+            print(l)
             impact = l[1]*2+l[2]*1+l[3]*3
             txt = ("1. "+open(paths+"Population_"+str(l[3])+".txt",'r').read()+"\n\n")
             txt+=("2. "+open(paths+"Economic_"+str(l[1])+".txt",'r').read()+"\n\n")
@@ -66,10 +68,11 @@ def subs():
                 filler.append(100)
             else:
                 filler.append(((2*Ranking - ans['Hazard_ranking']).abs()/Ranking).values[0]*100)
-            filler+=l[1:]
+            filler+=[l[3],l[1],l[2]]
+            print(filler)
             rankings.append([Ranking,filler])
             number+=1
-        rankings = sorted(rankings,key=lambda x: (x[0],x[1][3],x[1][4],x[1][5]))
+        rankings = sorted(rankings,key=lambda x: (x[0],x[1][3],x[1][4],x[1][5]),reverse=True)
         num = 1
         for rank in rankings:
             rank[1].insert(3,ordinal(num))
@@ -80,6 +83,7 @@ def subs():
             num = 0
             page = ""
             done = False
+            print(rank)
             for w in modif:
                 if w.find(';') != -1:
                     if not done and num == 4:
@@ -96,4 +100,4 @@ def subs():
     return send_file('Document.pdf',as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run('0.0.0.0',debug=True)

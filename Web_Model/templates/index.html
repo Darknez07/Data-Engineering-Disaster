@@ -21,25 +21,25 @@
                 <form id="{{ i }}" style="display: inline; margin-top: 10%; margin-left: 10%;">
                     <div style="display: inline;">
                         How Often Disasters Occur:
-                        <select id="{{ i }}x" style="display: inline; vertical-align: auto; margin: 0.6%;">
+                        <select id="{{ i }}1" style="display: inline; vertical-align: auto; margin: 0.6%;">
                             <option value="3">Frequent</option>
                             <option value="2">Occasional</option>
                             <option value="1">Rare</option>
                         </select>
                         What is the damage to Property:
-                        <select id="{{ i }}y" style="display: inline; vertical-align: auto; margin: 0.6%;">
+                        <select id="{{ i }}2" style="display: inline; vertical-align: auto; margin: 0.6%;">
                             <option value="3">High</option>
                             <option value="2">Mediocre</option>
                             <option value="1">Less</option>
                         </select>
                         Expenditure/Damage which costs money:
-                        <select id="{{ i }}z" style="display: inline; vertical-align: auto; margin: 0.6%;">
+                        <select id="{{ i }}3" style="display: inline; vertical-align: auto; margin: 0.6%;">
                             <option value="3">High</option>
                             <option value="2">Mediocre</option>
                             <option value="1">Less</option>
                         </select>
                         Population Loss/Death:
-                        <select id="{{ i }}1" style="display: inline; vertical-align: auto; margin: 0.6%;">
+                        <select id="{{ i }}4" style="display: inline; vertical-align: auto; margin: 0.6%;">
                             <option value="3">High</option>
                             <option value="2">Mediocre</option>
                             <option value="1">Less</option>
@@ -57,10 +57,10 @@
             for(let i=0;i<document.forms.length;i++){
                 fucked = document.getElementById(i.toString());
                 forms = {};
-                forms[i+"x"] = document.getElementById(i+"x").value;
-                forms[i +"y"] = document.getElementById(i+"y").value;
-                forms[i+"z"] = document.getElementById(i+"z").value;
                 forms[i+"1"] = document.getElementById(i+"1").value;
+                forms[i +"2"] = document.getElementById(i+"2").value;
+                forms[i+"3"] = document.getElementById(i+"3").value;
+                forms[i+"4"] = document.getElementById(i+"4").value;
                 all_of_them[i] = forms;
             }
             var data = JSON.stringify(all_of_them);
