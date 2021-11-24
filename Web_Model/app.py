@@ -1,7 +1,9 @@
 from flask import Flask
-from flask import render_template, request, send_file
+from flask import render_template, request, send_file,redirect
 import pandas as pd
 from conv_pdf import PDF
+import os
+
 df = pd.read_csv("..\Hazard_Ranked.csv")
 ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(n//10%10!=1)*(n%10<4)*n%10::4])
 app = Flask(__name__)
@@ -17,6 +19,11 @@ def router():
             val = 0
         print(val)
         return render_template('index.html', answer=True,num=val)
+
+@app.route("/download",methods=["GET", "POST"])
+def func():
+    if request.method == 'GET':
+        return send_file('Document.pdf',as_attachment=True)
 
 @app.route('/submit',methods=['POST','GET'])
 def subs():
@@ -97,7 +104,9 @@ def subs():
             pdf.print_chapter(chp,'Assessment for '+rank[1][0], page)
             chp+=1
         pdf.output('Document.pdf','F')
-    return send_file('Document.pdf',as_attachment=True)
+    return "Something"
+    # return send_file('Document.pdf',as_attachment=True)
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0',debug=True)
