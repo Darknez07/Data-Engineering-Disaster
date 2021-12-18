@@ -38,7 +38,7 @@ def subs():
         modif.append('\n')
         text_fill = {}
         pdf = PDF()
-        pdf.set_title('Lol')
+        pdf.set_title('Title 1')
         pdf.set_author('Rishi Kakkar, Akshat Singh, Rahul Pandey, Subham Shah, Nitesh Jha')
         for ans in request.json:
             print(ans)
@@ -109,4 +109,4 @@ def subs():
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0',debug=True)
+    app.run(debug=True)
